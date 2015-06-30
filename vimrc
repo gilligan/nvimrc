@@ -24,11 +24,12 @@ Plug 'honza/vim-snippets'
 Plug 'othree/html5.vim'
 Plug 'juvenn/mustache.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'heavenshell/vim-jsdoc'
+"Plug 'heavenshell/vim-jsdoc'
 Plug 'mattn/emmet-vim'
-Plug 'marijnh/tern_for_vim'
+"Plug 'marijnh/tern_for_vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'geekjuice/vim-mocha'
+Plug 'mxw/vim-jsx'
 
 Plug 'vim-scripts/textobj-user'
 Plug 'vim-scripts/textobj-entire'
@@ -89,8 +90,8 @@ Plug 'itchyny/calendar.vim'
 Plug 'derekwyatt/vim-scala'
 Plug 'calebsmith/vim-lambdify'
 Plug 'LnL7/vim-nix'
-Plug 'fmoralesc/vim-pad'
-Plug 'kana/vim-arpeggio'
+Plug 'benekastah/neomake'
+"Plug 'fmoralesc/vim-pad'
 
 call plug#end()
 
@@ -139,6 +140,7 @@ set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 let &shellpipe='&>'
 set synmaxcol=800      " do not highlight huge files
+set mouse=
 augroup cline          " show cursorline only in active view/normal mode
     au!
     au WinLeave,InsertEnter * set nocursorline
@@ -152,6 +154,7 @@ syntax on
 set t_Co=256
 set t_ut=
 let g:solarized_termcolors=256
+let g:solarized_termtrans=1
 colo solarized
 
 "
@@ -169,14 +172,14 @@ let g:airline_theme='molokai'
 "
 " arpeggio settings
 "
-call arpeggio#load()
-Arpeggio inoremap <Space>i if<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
-Arpeggio inoremap <Space>c case<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
-Arpeggio inoremap <Space>; ::<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
-Arpeggio inoremap <Space>d def<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
-Arpeggio inoremap <Space>f f<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
-Arpeggio inoremap <Space>g \|<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
-Arpeggio inoremap <Space>l \<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
+"call arpeggio#load()
+"Arpeggio inoremap <Space>i if<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
+"Arpeggio inoremap <Space>c case<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
+"Arpeggio inoremap <Space>; ::<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
+"Arpeggio inoremap <Space>d def<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
+"Arpeggio inoremap <Space>f f<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
+"Arpeggio inoremap <Space>g \|<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
+"Arpeggio inoremap <Space>l \<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
 
 "
 " auto commands
@@ -462,7 +465,7 @@ let g:sneak#streak = 1
 "
 " syntastic plugin
 "
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['eslint', 'jshint']
 "mark syntax errors with :signs
 let g:syntastic_enable_signs=1
 "automatically jump to the error when saving the file
