@@ -16,8 +16,9 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-vinegar'
 
-Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe'
+"Plug 'ervandew/supertab'
+"Plug 'Valloric/YouCompleteMe'
+Plug 'Shougo/deoplete.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
@@ -26,7 +27,7 @@ Plug 'juvenn/mustache.vim'
 Plug 'pangloss/vim-javascript'
 "Plug 'heavenshell/vim-jsdoc'
 Plug 'mattn/emmet-vim'
-"Plug 'marijnh/tern_for_vim'
+Plug 'marijnh/tern_for_vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'geekjuice/vim-mocha'
 Plug 'mxw/vim-jsx'
@@ -53,6 +54,7 @@ Plug 'ujihisa/neco-ghc'
 Plug 'Twinside/vim-hoogle'
 Plug 'ujihisa/unite-haskellimport'
 Plug 'eagletmt/unite-haddock'
+Plug 'idris-hackers/idris-vim'
 
 Plug 'bling/vim-airline'
 Plug 'tomasr/molokai'
@@ -68,6 +70,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'badwolf'
 
 Plug 'Shougo/vimproc'
+Plug 'Shougo/vimshell.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
 Plug 'gregsexton/gitv'
@@ -83,7 +86,7 @@ Plug 'Majutsushi/tagbar'
 
 Plug 'vim-scripts/UnconditionalPaste'
 Plug 'current-func-info.vim'
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'airblade/vim-rooter'
 Plug 'itchyny/calendar.vim'
@@ -531,3 +534,6 @@ let g:zv_docsets_dir = "/home/tpflug/.local/share/Zeal/Zeal/docsets"
 let g:zv_added_files_type = {
     \ 'javascript': 'node.js',
     \}
+
+let g:deoplete#enable_at_startup = 1
+autocmd! BufWritePost * Neomake
