@@ -95,6 +95,8 @@ Plug 'calebsmith/vim-lambdify'
 Plug 'LnL7/vim-nix'
 Plug 'benekastah/neomake'
 "Plug 'fmoralesc/vim-pad'
+Plug 'mattn/gist-vim'
+Plug 'mattn/webapi-vim'
 
 call plug#end()
 
@@ -535,5 +537,11 @@ let g:zv_added_files_type = {
     \ 'javascript': 'node.js',
     \}
 
-let g:deoplete#enable_at_startup = 1
 autocmd! BufWritePost * Neomake
+
+
+"
+" gist settings
+"
+let g:gist_clip_command = 'xclip -selection clipboard'
+let g:gist_browser_command = 'chromium-browser %URL% &'
