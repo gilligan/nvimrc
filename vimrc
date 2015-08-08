@@ -16,9 +16,9 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-vinegar'
 
-"Plug 'ervandew/supertab'
-"Plug 'Valloric/YouCompleteMe'
-Plug 'Shougo/deoplete.nvim'
+Plug 'ervandew/supertab'
+Plug 'Valloric/YouCompleteMe'
+"Plug 'Shougo/deoplete.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
@@ -29,8 +29,8 @@ Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
 Plug 'marijnh/tern_for_vim'
 Plug 'kchmck/vim-coffee-script'
-Plug 'geekjuice/vim-mocha'
 Plug 'mxw/vim-jsx'
+Plug 'geekjuice/vim-mocha'
 
 Plug 'vim-scripts/textobj-user'
 Plug 'vim-scripts/textobj-entire'
@@ -79,6 +79,7 @@ Plug 'mhinz/vim-signify'
 Plug 'kien/ctrlp.vim'
 Plug 'Valloric/ListToggle'
 Plug 'scrooloose/nerdcommenter'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
@@ -97,6 +98,8 @@ Plug 'benekastah/neomake'
 "Plug 'fmoralesc/vim-pad'
 Plug 'mattn/gist-vim'
 Plug 'mattn/webapi-vim'
+Plug 'ryanoasis/vim-webdevicons'
+Plug 'editorconfig/editorconfig-vim'
 
 call plug#end()
 
@@ -447,9 +450,6 @@ nnoremap <leader>t :CtrlPBufTag<CR>
 nnoremap <leader>p vip
 " general mappings }}}
 
-map <Leader>mr :call RunCurrentSpecFile()<CR>
-map <Leader>ml :call RunLastSpec()<CR>
-map <Leader>ma :call RunAllSpecs()<CR>
 
 "
 " seek plugin
@@ -538,10 +538,34 @@ let g:zv_added_files_type = {
     \}
 
 autocmd! BufWritePost * Neomake
-
-
+let g:deoplete#enable_at_startup = 1
+"inoremap <expr><Tab>  deoplete#mappings#manual_complete()
 "
 " gist settings
 "
 let g:gist_clip_command = 'xclip -selection clipboard'
 let g:gist_browser_command = 'chromium-browser %URL% &'
+
+"
+" vim mocha settings
+"
+nnoremap <leader>mr :call RunCurrentSpecFile()<CR>
+nnoremap <leader>mi :call RunNearestSpec()<CR>
+nnoremap <leader>ma :call RunAllSpecs()<CR>
+
+
+
+" Zoom / Restore window.
+function! s:ZoomToggle() abort
+    if exists('t:zoomed') && t:zoomed
+        exec t:zoom_winrestcmd
+        let t:zoomed = 0
+    else
+        let t:zoom_winrestcmd = winrestcmd()
+        resize
+        vertical resize
+        let t:zoomed = 1
+    endif
+endfunction
+command! ZoomToggle call s:ZoomToggle()
+nnoremap <silent> <C-w>z :ZoomToggle<CR>
