@@ -4,6 +4,9 @@ let mapleader = "\<Space>"
 
 call plug#begin('~/.vim/plugged')
 
+"
+" tpope essentials
+"
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
@@ -15,23 +18,32 @@ Plug 'tpope/vim-obsession'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-vinegar'
+Plug 'tpope/vim-projectionist'
 
+"
+" completions & snippets
+"
 Plug 'ervandew/supertab'
 Plug 'Valloric/YouCompleteMe'
-"Plug 'Shougo/deoplete.nvim'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
+"
+" javascript stuff
+"
 Plug 'othree/html5.vim'
-Plug 'juvenn/mustache.vim'
 Plug 'pangloss/vim-javascript'
-"Plug 'heavenshell/vim-jsdoc'
 Plug 'mattn/emmet-vim'
 Plug 'marijnh/tern_for_vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mxw/vim-jsx'
 Plug 'geekjuice/vim-mocha'
+Plug 'helino/vim-json'
+Plug 'crusoexia/vim-javascript-lib'
 
+"
+" text objects & movements
+"
 Plug 'vim-scripts/textobj-user'
 Plug 'vim-scripts/textobj-entire'
 Plug 'vim-scripts/textobj-line'
@@ -41,12 +53,13 @@ Plug 'kana/vim-textobj-syntax'
 Plug 'thinca/vim-textobj-comment'
 Plug 'gilligan/textobj-lastpaste'
 Plug 'bkad/CamelCaseMotion'
-
-Plug 'vim-scripts/matchit.zip'
 Plug 'mbriggs/mark.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'wellle/targets.vim'
 
+"
+" haskell
+"
 Plug 'dag/vim2hs'
 Plug 'raichoo/haskell-vim'
 Plug 'eagletmt/ghcmod-vim'
@@ -56,48 +69,44 @@ Plug 'ujihisa/unite-haskellimport'
 Plug 'eagletmt/unite-haddock'
 Plug 'idris-hackers/idris-vim'
 
+"
+" git / scm
+"
+Plug 'mhinz/vim-signify'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+"
+" themes & looks
+"
 Plug 'bling/vim-airline'
-Plug 'tomasr/molokai'
-Plug 'fmoralesc/molokayo'
-Plug 'vim-scripts/EditPlus'
-Plug 'helino/vim-json'
-Plug 'Lucius'
-Plug 'jaromero/vim-monokai-refined'
-Plug 'andrwb/vim-lapis256'
 Plug 'altercation/vim-colors-solarized'
-Plug 'crusoexia/vim-javascript-lib'
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'badwolf'
 
 Plug 'Shougo/vimproc'
 Plug 'Shougo/vimshell.vim'
 Plug 'christoomey/vim-tmux-navigator'
 
-Plug 'gregsexton/gitv'
-Plug 'mhinz/vim-signify'
-
-Plug 'kien/ctrlp.vim'
+"
+" navigation / buffers
+"
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Valloric/ListToggle'
 Plug 'scrooloose/nerdcommenter'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'scrooloose/nerdtree'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 Plug 'Majutsushi/tagbar'
 
+"
+" misc
+"
 Plug 'vim-scripts/UnconditionalPaste'
 Plug 'current-func-info.vim'
-"Plug 'scrooloose/syntastic'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'airblade/vim-rooter'
 Plug 'itchyny/calendar.vim'
-Plug 'derekwyatt/vim-scala'
 Plug 'calebsmith/vim-lambdify'
 Plug 'LnL7/vim-nix'
 Plug 'benekastah/neomake'
-"Plug 'fmoralesc/vim-pad'
-Plug 'mattn/gist-vim'
-Plug 'mattn/webapi-vim'
 Plug 'ryanoasis/vim-webdevicons'
 Plug 'editorconfig/editorconfig-vim'
 
@@ -175,19 +184,7 @@ let g:tern_show_argument_hints="on_hold"
 " airline settings
 "
 let g:airline_powerline_fonts = 1
-let g:airline_theme='molokai'
-
-"
-" arpeggio settings
-"
-"call arpeggio#load()
-"Arpeggio inoremap <Space>i if<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
-"Arpeggio inoremap <Space>c case<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
-"Arpeggio inoremap <Space>; ::<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
-"Arpeggio inoremap <Space>d def<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
-"Arpeggio inoremap <Space>f f<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
-"Arpeggio inoremap <Space>g \|<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
-"Arpeggio inoremap <Space>l \<Space><Esc>:call UltiSnips#ExpandSnippet()<CR>
+let g:airline_theme='solarized'
 
 "
 " auto commands
@@ -393,11 +390,6 @@ map <C-t> :CtrlPTag<cr>
 imap <C-E> <C-O>$
 imap <C-A> <C-O>^
 
-" use arrow keys for window navigation
-map <C-Up>   <C-W>k<C-W>_
-map <C-Down> <C-W>j<C-W>_
-map <C-Left> <C-W>h<C-W>_
-map <C-Right> <C-W>l<C-W>_
 
 " paste clipboard contents
 map ,p "+p
@@ -427,11 +419,9 @@ vnoremap ; y:<C-r>"<C-b>
 " home row leader key mappings
 "
 nnoremap <leader><CR> :NERDTreeToggle<CR>
-nnoremap <leader>a %
 " nnoremap <leader>s <Plug>SlimeParagraphSend()
 " nnoremap <leader>d YCM           <-- get rid of this
 "nnoremap <leader>f :Unite -start-insert file_rec/async<CR>
-nnoremap <leader>f :FZF<CR>
 " nnoremap <leader>g Signify       <-- get rid of this
 " nnoremap <leader>hlt HiLinkTrace <-- get rid of this
 " nnoremap <leader>j               <-- SPACE FOR RENT
@@ -467,21 +457,6 @@ let g:signify_vcs_list = ['git']
 "
 let g:sneak#streak = 1
 
-"
-" syntastic plugin
-"
-let g:syntastic_javascript_checkers = ['eslint', 'jshint']
-"mark syntax errors with :signs
-let g:syntastic_enable_signs=1
-"automatically jump to the error when saving the file
-let g:syntastic_auto_jump=0
-"show the error list automatically
-let g:syntastic_auto_loc_list=0
-" always fill the location list with the errors
-let g:syntastic_always_populate_loc_list=1
-"don't care about warnings
-"let g:syntastic_quiet_messages = { 'level': 'warnings' }
-
 
 "
 " tabular plugin {{{
@@ -494,7 +469,6 @@ vmap <Leader>t> :Tabularize /-><CR>
 
 " you complete me
 let g:ycm_add_preview_to_completeopt = 0
-"let g:ycm_confirm_extra_conf = 0
 
 " let g:ycm_key_invoke_completion = '<S-Space>'
 " since mapping <S-Space> is a bit of a problem
@@ -504,15 +478,12 @@ let g:ycm_add_preview_to_completeopt = 0
 " $ xmodmap -e 'keycode 65 = space <F13> space'
 let g:ycm_key_invoke_completion = '<S-F8>'
 
-
-
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
-"let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsExpandTrigger = "<C-@>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
@@ -538,13 +509,6 @@ let g:zv_added_files_type = {
     \}
 
 autocmd! BufWritePost * Neomake
-let g:deoplete#enable_at_startup = 1
-"inoremap <expr><Tab>  deoplete#mappings#manual_complete()
-"
-" gist settings
-"
-let g:gist_clip_command = 'xclip -selection clipboard'
-let g:gist_browser_command = 'chromium-browser %URL% &'
 
 "
 " vim mocha settings
