@@ -134,6 +134,7 @@ set softtabstop=4    " tab equals 4 spaces
 set laststatus=2     " always show status
 set background=light " light background color
 set incsearch        " search incrementally
+set nohlsearch       " no search higlight
 set grepprg=grep\ -nH\ $* " print filename for match
 set backspace=indent,eol,start " make backspace behave
 set showmatch        " quickly jump to matching bracket
@@ -184,7 +185,7 @@ let g:tern_show_argument_hints="on_hold"
 " airline settings
 "
 let g:airline_powerline_fonts = 1
-let g:airline_theme='solarized'
+let g:airline_theme='molokai'
 
 "
 " auto commands
@@ -438,6 +439,8 @@ nnoremap <leader>t :CtrlPBufTag<CR>
 
 " visual select last paste (textobj-lastpate)
 nnoremap <leader>p vip
+
+"nnoremap <C-i> :FZF<cr>
 " general mappings }}}
 
 
@@ -534,4 +537,28 @@ endfunction
 command! ZoomToggle call s:ZoomToggle()
 nnoremap <silent> <C-w>z :ZoomToggle<CR>
 
-let g:airline_theme="molokai"
+
+
+" Window split settings
+highlight TermCursor ctermfg=red guifg=red
+set splitbelow
+set splitright
+
+" Terminal settings
+if has('nvim')
+    tnoremap ,<ESC> <C-\><C-n>
+    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+endif
+
+" neomake settings
+let g:neomake_open_list = 1
+let g:neomake_javascript_enabled_makers = ['eslint']
+
+" javascript fold settings
+syntax region foldBraces start=/{/ end=/}/ transparent fold keepend extend
+setlocal foldmethod=syntax
+setlocal foldlevel=99
+
+" use fzf
+set rtp+=~/.fzf
+source ~/.vim/fzf-js-import.vim
