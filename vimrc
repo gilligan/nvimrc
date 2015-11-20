@@ -1,8 +1,7 @@
-set nocompatible
 nnoremap <Space> <Nop>
 let mapleader = "\<Space>"
 
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.nvim/plugged')
 
 "
 " tpope essentials
@@ -24,7 +23,6 @@ Plug 'tpope/vim-projectionist'
 " completions & snippets
 "
 Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
@@ -109,6 +107,7 @@ Plug 'LnL7/vim-nix'
 Plug 'benekastah/neomake'
 Plug 'ryanoasis/vim-webdevicons'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'rizzatti/dash.vim'
 
 call plug#end()
 
@@ -420,6 +419,7 @@ vnoremap ; y:<C-r>"<C-b>
 " home row leader key mappings
 "
 nnoremap <leader><CR> :NERDTreeToggle<CR>
+nmap <leader>ds <Plug>DashSearch
 " nnoremap <leader>s <Plug>SlimeParagraphSend()
 " nnoremap <leader>d YCM           <-- get rid of this
 "nnoremap <leader>f :Unite -start-insert file_rec/async<CR>
@@ -511,6 +511,10 @@ let g:zv_added_files_type = {
     \ 'javascript': 'node.js',
     \}
 
+let g:dash_map = {
+    \ 'javascript': [ 'javascript', 'nodejs', 'ramda' ]
+    \}
+
 autocmd! BufWritePost * Neomake
 
 "
@@ -561,4 +565,3 @@ setlocal foldlevel=99
 
 " use fzf
 set rtp+=~/.fzf
-source ~/.vim/fzf-js-import.vim
