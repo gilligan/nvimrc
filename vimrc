@@ -35,9 +35,9 @@ Plug 'mattn/emmet-vim'
 Plug 'marijnh/tern_for_vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mxw/vim-jsx'
-Plug 'geekjuice/vim-mocha'
 Plug 'helino/vim-json'
 Plug 'crusoexia/vim-javascript-lib'
+Plug 'janko-m/vim-test'
 
 "
 " text objects & movements
