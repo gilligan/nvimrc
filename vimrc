@@ -450,10 +450,11 @@ nnoremap <leader>p vip
 let g:seek_enable_jumps = 1
 
 
-let g:signify_disable_by_default = 1
-let g:signify_mapping_next_hunk = ']h'
-let g:signify_mapping_prev_hunk = '[h'
+let g:signify_disable_by_default = 0
 let g:signify_vcs_list = ['git']
+nmap ]h <plug>(signify-next-hunk)
+nmap [h <plug>(signify-prev-hunk)
+
 
 "
 " sneak settings
@@ -555,7 +556,7 @@ if has('nvim')
 endif
 
 " neomake settings
-let g:neomake_open_list = 1
+let g:neomake_open_list = 0
 let g:neomake_javascript_enabled_makers = ['eslint']
 
 " javascript fold settings
