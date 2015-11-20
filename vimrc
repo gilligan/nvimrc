@@ -518,11 +518,11 @@ let g:dash_map = {
 autocmd! BufWritePost * Neomake
 
 "
-" vim mocha settings
+" vim test settings
 "
-nnoremap <leader>mr :call RunCurrentSpecFile()<CR>
-nnoremap <leader>mi :call RunNearestSpec()<CR>
-nnoremap <leader>ma :call RunAllSpecs()<CR>
+nnoremap <leader>mr :TestFile<CR>
+nnoremap <leader>mi :TestNearest<CR>
+nnoremap <leader>ml :TestLast<CR>
 
 
 
