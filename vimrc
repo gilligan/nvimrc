@@ -109,6 +109,7 @@ Plug 'ryanoasis/vim-webdevicons'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rizzatti/dash.vim'
 Plug 'dyng/ctrlsf.vim'
+Plug 'krisajenkins/vim-projectlocal'
 
 
 call plug#end()
