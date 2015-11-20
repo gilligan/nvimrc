@@ -108,6 +108,8 @@ Plug 'benekastah/neomake'
 Plug 'ryanoasis/vim-webdevicons'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rizzatti/dash.vim'
+Plug 'dyng/ctrlsf.vim'
+
 
 call plug#end()
 
@@ -563,6 +565,9 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 syntax region foldBraces start=/{/ end=/}/ transparent fold keepend extend
 setlocal foldmethod=syntax
 setlocal foldlevel=99
+
+" ctrlsf settings
+nmap     <leader>f <Plug>CtrlSFPrompt
 
 " use fzf
 set rtp+=~/.fzf
