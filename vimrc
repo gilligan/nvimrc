@@ -79,9 +79,13 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'bling/vim-airline'
 Plug 'altercation/vim-colors-solarized'
 
+"
+" terminal / integration
+"
 Plug 'Shougo/vimproc'
 Plug 'Shougo/vimshell.vim'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'kassio/neoterm'
 
 "
 " navigation / buffers
@@ -527,8 +531,7 @@ autocmd! BufWritePost * Neomake
 nnoremap <leader>mr :TestFile<CR>
 nnoremap <leader>mi :TestNearest<CR>
 nnoremap <leader>ml :TestLast<CR>
-
-
+let test#strategy = 'neoterm'
 
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
