@@ -54,6 +54,7 @@ Plug 'bkad/CamelCaseMotion'
 Plug 'mbriggs/mark.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'wellle/targets.vim'
+Plug 'AndrewRadev/sideways.vim'
 
 "
 " haskell
@@ -572,6 +573,10 @@ setlocal foldlevel=99
 
 " ctrlsf settings
 nmap     <leader>f <Plug>CtrlSFPrompt
+
+" Sideways mapping
+nnoremap <leader>[ :SidewaysLeft<CR>
+nnoremap <leader>] :SidewaysRight<CR>
 
 " use fzf
 set rtp+=~/.fzf
