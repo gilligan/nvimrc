@@ -339,10 +339,6 @@ let g:ctrlp_buftag_types = {
     \ },
   \ }
 
-"
-" arpeggio mappings for ultisnips
-"
-
 
 " fix highlightning of functions
 set iskeyword+='
@@ -531,6 +527,7 @@ autocmd! BufWritePost * Neomake
 nnoremap <leader>mr :TestFile<CR>
 nnoremap <leader>mi :TestNearest<CR>
 nnoremap <leader>ml :TestLast<CR>
+nnoremap <leader>mc :Tclose<CR>
 let test#strategy = 'neoterm'
 
 " Zoom / Restore window.
