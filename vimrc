@@ -55,6 +55,8 @@ Plug 'mbriggs/mark.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'wellle/targets.vim'
 Plug 'AndrewRadev/sideways.vim'
+Plug 'kana/vim-operator-user'
+Plug 'haya14busa/vim-operator-flashy'
 
 "
 " haskell
@@ -73,6 +75,7 @@ Plug 'idris-hackers/idris-vim'
 "
 Plug 'mhinz/vim-signify'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'junegunn/gv.vim'
 
 "
 " themes & looks
@@ -98,6 +101,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 Plug 'Majutsushi/tagbar'
+Plug 'wellle/visual-split.vim'
 
 "
 " misc
@@ -115,7 +119,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'rizzatti/dash.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'krisajenkins/vim-projectlocal'
-
+Plug 'terryma/vim-multiple-cursors'
+Plug 'jceb/vim-orgmode'
 
 call plug#end()
 
@@ -574,6 +579,10 @@ nmap     <leader>f <Plug>CtrlSFPrompt
 " Sideways mapping
 nnoremap <leader>[ :SidewaysLeft<CR>
 nnoremap <leader>] :SidewaysRight<CR>
+
+" vim-operator-flashy
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
 
 " use fzf
 set rtp+=~/.fzf
