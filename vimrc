@@ -25,19 +25,20 @@ Plug 'tpope/vim-projectionist'
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'Shougo/deoplete.nvim'
 
 "
 " javascript stuff
 "
 Plug 'othree/html5.vim'
-Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'mattn/emmet-vim'
-Plug 'marijnh/tern_for_vim'
-Plug 'kchmck/vim-coffee-script'
-Plug 'mxw/vim-jsx'
-Plug 'helino/vim-json'
-Plug 'crusoexia/vim-javascript-lib'
-Plug 'janko-m/vim-test'
+Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
+Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'helino/vim-json', { 'for': 'json' }
+Plug 'crusoexia/vim-javascript-lib', { 'for': 'javascript' }
+Plug 'janko-m/vim-test', { 'for': 'javascript' }
 
 "
 " text objects & movements
@@ -61,14 +62,14 @@ Plug 'haya14busa/vim-operator-flashy'
 "
 " haskell
 "
-Plug 'dag/vim2hs'
-Plug 'raichoo/haskell-vim'
-Plug 'eagletmt/ghcmod-vim'
-Plug 'ujihisa/neco-ghc'
-Plug 'Twinside/vim-hoogle'
-Plug 'ujihisa/unite-haskellimport'
-Plug 'eagletmt/unite-haddock'
-Plug 'idris-hackers/idris-vim'
+Plug 'dag/vim2hs', { 'for': 'haskell' }
+Plug 'raichoo/haskell-vim', { 'for': 'haskell' }
+Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+Plug 'ujihisa/neco-ghc', { 'for': 'haskell' }
+Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
+Plug 'ujihisa/unite-haskellimport', { 'for': 'haskell' }
+Plug 'eagletmt/unite-haddock', { 'for': 'haskell' }
+Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
 
 "
 " git / scm
@@ -114,7 +115,6 @@ Plug 'itchyny/calendar.vim'
 Plug 'calebsmith/vim-lambdify'
 Plug 'LnL7/vim-nix'
 Plug 'benekastah/neomake'
-Plug 'ryanoasis/vim-webdevicons'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rizzatti/dash.vim'
 Plug 'dyng/ctrlsf.vim'
