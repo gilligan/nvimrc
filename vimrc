@@ -26,19 +26,21 @@ Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Shougo/deoplete.nvim'
+Plug 'carlitux/deoplete-ternjs'
+Plug 'ujihisa/neco-look'
 
 "
 " javascript stuff
 "
 Plug 'othree/html5.vim'
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+Plug 'pangloss/vim-javascript'
 Plug 'mattn/emmet-vim'
-Plug 'marijnh/tern_for_vim', { 'for': 'javascript' }
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'helino/vim-json', { 'for': 'json' }
-Plug 'crusoexia/vim-javascript-lib', { 'for': 'javascript' }
-Plug 'janko-m/vim-test', { 'for': 'javascript' }
+Plug 'kchmck/vim-coffee-script'
+Plug 'mxw/vim-jsx'
+Plug 'helino/vim-json'
+Plug 'crusoexia/vim-javascript-lib'
+Plug 'janko-m/vim-test'
+"Plug 'marijnh/tern_for_vim'
 
 "
 " text objects & movements
@@ -81,7 +83,8 @@ Plug 'junegunn/gv.vim'
 "
 " themes & looks
 "
-Plug 'bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'altercation/vim-colors-solarized'
 
 "
@@ -89,7 +92,7 @@ Plug 'altercation/vim-colors-solarized'
 "
 Plug 'Shougo/vimproc'
 Plug 'Shougo/vimshell.vim'
-Plug 'christoomey/vim-tmux-navigator'
+Plug 'gilligan/vim-tmux-navigator'
 Plug 'kassio/neoterm'
 
 "
@@ -121,6 +124,7 @@ Plug 'dyng/ctrlsf.vim'
 Plug 'krisajenkins/vim-projectlocal'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jceb/vim-orgmode'
+Plug 'reedes/vim-wordy'
 
 call plug#end()
 
@@ -192,6 +196,7 @@ colo solarized
 "
 set updatetime=2000
 let g:tern_show_argument_hints="on_hold"
+let g:tern_request_timeout = 1
 
 "
 " airline settings
@@ -478,48 +483,12 @@ vmap <Leader>t= :Tabularize /=<CR>
 vmap <Leader>t: :Tabularize /:<CR>
 vmap <Leader>t> :Tabularize /-><CR>
 
-
-
-" you complete me
-let g:ycm_add_preview_to_completeopt = 0
-
-" let g:ycm_key_invoke_completion = '<S-Space>'
-" since mapping <S-Space> is a bit of a problem
-" in the terminal the solution is to use xmodmap
-" to remap S-Space to something else and use that
-" in vim :
-" $ xmodmap -e 'keycode 65 = space <F13> space'
-let g:ycm_key_invoke_completion = '<S-F8>'
-
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
 let g:UltiSnipsExpandTrigger = "<C-@>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-let g:ycm_semantic_triggers =  {
-  \   'c' : ['->', '.'],
-  \   'objc' : ['->', '.'],
-  \   'ocaml' : ['.', '#'],
-  \   'cpp,objcpp' : ['->', '.', '::'],
-  \   'perl' : ['->'],
-  \   'php' : ['->', '::'],
-  \   'cs,java,javascript,d,python,perl6,scala,vb,elixir,go' : ['.'],
-  \   'vim' : ['re![_a-zA-Z]+[_\w]*\.'],
-  \   'ruby' : ['.', '::'],
-  \   'lua' : ['.', ':'],
-  \   'erlang' : [':'],
-  \ }
-
-let g:zv_zeal_directory = "/home/tpflug/.nix-profile/bin/zeal"
-let g:zv_docsets_dir = "/home/tpflug/.local/share/Zeal/Zeal/docsets"
-let g:zv_added_files_type = {
-    \ 'javascript': 'node.js',
-    \}
 
 let g:dash_map = {
     \ 'javascript': [ 'javascript', 'nodejs', 'ramda' ]
@@ -568,11 +537,6 @@ endif
 let g:neomake_open_list = 0
 let g:neomake_javascript_enabled_makers = ['eslint']
 
-" javascript fold settings
-syntax region foldBraces start=/{/ end=/}/ transparent fold keepend extend
-setlocal foldmethod=syntax
-setlocal foldlevel=99
-
 " ctrlsf settings
 nmap     <leader>f <Plug>CtrlSFPrompt
 
@@ -586,3 +550,9 @@ nmap Y <Plug>(operator-flashy)$
 
 " use fzf
 set rtp+=~/.fzf
+
+" deoplete
+let g:deoplete#file#enable_buffer_path = 1
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#omni_patterns = {}
