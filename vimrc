@@ -33,15 +33,13 @@ Plug 'ujihisa/neco-look'
 " javascript stuff
 "
 Plug 'othree/html5.vim'
-Plug 'pangloss/vim-javascript'
-Plug 'mattn/emmet-vim'
-Plug 'kchmck/vim-coffee-script'
 Plug 'mxw/vim-jsx'
-Plug 'helino/vim-json'
-Plug 'crusoexia/vim-javascript-lib'
+Plug 'elzr/vim-json'
 Plug 'janko-m/vim-test'
 "Plug 'marijnh/tern_for_vim'
-
+"Plug 'sheerun/vim-polyglot'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 "
 " text objects & movements
 "
@@ -64,14 +62,18 @@ Plug 'haya14busa/vim-operator-flashy'
 "
 " haskell
 "
-Plug 'dag/vim2hs', { 'for': 'haskell' }
-Plug 'raichoo/haskell-vim', { 'for': 'haskell' }
-Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'cloudhead/neovim-ghcid', { 'for': 'haskell' }
 Plug 'ujihisa/neco-ghc', { 'for': 'haskell' }
-Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
+Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
+"Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
 Plug 'ujihisa/unite-haskellimport', { 'for': 'haskell' }
-Plug 'eagletmt/unite-haddock', { 'for': 'haskell' }
-Plug 'idris-hackers/idris-vim', { 'for': 'idris' }
+"Plug 'eagletmt/unite-haddock', { 'for': 'haskell' }
+
+"
+" idris
+"
+Plug 'idris-hackers/idris-vim'
 
 "
 " git / scm
@@ -111,13 +113,12 @@ Plug 'wellle/visual-split.vim'
 " misc
 "
 Plug 'vim-scripts/UnconditionalPaste'
-Plug 'current-func-info.vim'
 Plug 'KabbAmine/zeavim.vim'
 Plug 'airblade/vim-rooter'
 Plug 'itchyny/calendar.vim'
-Plug 'calebsmith/vim-lambdify'
 Plug 'LnL7/vim-nix'
-Plug 'benekastah/neomake'
+"Plug 'benekastah/neomake'
+Plug 'w0rp/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rizzatti/dash.vim'
 Plug 'dyng/ctrlsf.vim'
@@ -125,6 +126,7 @@ Plug 'krisajenkins/vim-projectlocal'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'jceb/vim-orgmode'
 Plug 'reedes/vim-wordy'
+Plug 'elmcast/elm-vim'
 
 call plug#end()
 
@@ -169,7 +171,7 @@ set noswapfile       " no useless swap files
 set wildignore+=*.so,*.swp,*.zip " ignore patterns for completion
 set nohidden
 let g:rct_completion_use_fri = 1
-"set clipboard=unnamed " clipboard = unnamed reg for easy interaction
+set clipboard=unnamedplus " clipboard = unnamed reg for easy interaction
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
 let &shellpipe='&>'
@@ -203,6 +205,7 @@ let g:tern_request_timeout = 1
 "
 let g:airline_powerline_fonts = 1
 let g:airline_theme='molokai'
+let g:airline#extensions#ale#enabled = 1
 
 "
 " auto commands
@@ -210,19 +213,6 @@ let g:airline_theme='molokai'
 
 " Show trailing whitespaces
 highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd BufWinEnter javascript match ExtraWhitespace /\s\+$/
-autocmd InsertEnter javascript match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave javascript match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave javascript call clearmatches()
-autocmd FileType javascript setlocal nofoldenable
-autocmd FileType coffee let &makeprg='product-build'
-" Remove Trailing Whitespace
-func! s:StripTrailingWhitespace()
-    normal mZ
-    %s/\s\+$//e
-    normal `Z
-endf
-au FileType * au BufWritePre <buffer> :silent! call <SID>StripTrailingWhitespace()`
 " Resize splits when window is resized
 au VimResized * exe "normal! \<c-w>="
 " Go to last editing position
@@ -275,24 +265,19 @@ autocmd QuickFixCmdPost *grep* cwindow
 let $PATH = $PATH . ':' . expand("~/.cabal/bin")
 
 "
-" vim2hs settings
+" haskell-vim settings
 "
 
-let g:haddock_browser = "open"
-let g:haddock_browser_callformat = "%s %s"
-let g:hpaste_author = 'gilligan'
-let g:haskell_conceal = 0
-let g:haskell_conceal_enumerations = 0
-let g:haskell_quasi         = 0
-let g:haskell_interpolation = 0
-let g:haskell_regex         = 0
-let g:haskell_jmacro        = 0
-let g:haskell_shqq          = 0
-let g:haskell_sql           = 0
-let g:haskell_json          = 0
-let g:haskell_xml           = 0
-let g:haskell_hsp           = 0
-let g:haskell_no_indent     = 1
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+let g:haskell_indent_case_alternative = 1
+
+
 
 call unite#custom_default_action('haddock', 'browse_remote')
 
@@ -354,18 +339,6 @@ let g:ctrlp_buftag_types = {
 " fix highlightning of functions
 set iskeyword+='
 
-
-"
-" configuration for syntastic
-"
-let g:syntastic_haskell_checkers = ['ghc_mod', 'hlint']
-
-autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-autocmd FileType haskell setlocal nofoldenable
-autocmd FileType haskell setlocal conceallevel=0
-autocmd FileType haskell compiler hlint
-
-
 function! GhciReload()
     call VimuxSendText(":r")
     call VimuxSendKeys("Enter")
@@ -377,10 +350,13 @@ nnoremap <leader>hT :execute "GhcModTypeInsert!"<CR>
 nnoremap <leader>hc :execute "GhcModTypeClear"<CR>
 nnoremap <leader>hi :execute "GhcModInfoPreview!"<CR>
 nnoremap <leader>hh :execute "GhcImportedFromOpenHaddock"<CR>
+nnoremap <leader>hg :execute "GhcModSigCodegen"<CR>
 nnoremap <leader>hI :execute "Unite -start-insert haskellimport"<CR>
 nnoremap <leader>hr :call GhciReload()<CR>
 nnoremap <leader>hs :execute "Unite hoogle"<CR>
 nnoremap <leader>hb k0yiWjpA
+nnoremap <leader>tn :execute "Tnew"<CR>
+nnoremap <leader>tc :execute "Tclose"<CR>
 
 
 
@@ -486,7 +462,7 @@ vmap <Leader>t> :Tabularize /-><CR>
 let g:SuperTabDefaultCompletionType = '<C-n>'
 
 " better key bindings for UltiSnipsExpandTrigger
-let g:UltiSnipsExpandTrigger = "<C-@>"
+let g:UltiSnipsExpandTrigger = "<C-K>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
@@ -494,7 +470,7 @@ let g:dash_map = {
     \ 'javascript': [ 'javascript', 'nodejs', 'ramda' ]
     \}
 
-autocmd! BufWritePost * Neomake
+"autocmd! BufWritePost * Neomake
 
 "
 " vim test settings
@@ -529,13 +505,21 @@ set splitright
 
 " Terminal settings
 if has('nvim')
-    tnoremap ,<ESC> <C-\><C-n>
-    au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    tnoremap <F2> <C-\><C-n>
+    "tnoremap ,<ESC> <C-\><C-n>
 endif
+
+"
+" ale linters
+"
+let g:ale_linters = {'haskell': ['hlint', 'ghc']}
+
 
 " neomake settings
 let g:neomake_open_list = 0
 let g:neomake_javascript_enabled_makers = ['eslint']
+" define elm-make maker
+let g:neomake_haskell_enabled_makers = [ ]
 
 " ctrlsf settings
 nmap     <leader>f <Plug>CtrlSFPrompt
@@ -556,3 +540,7 @@ let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#omni_patterns = {}
+
+let g:javascript_conceal_function       = "λ"
+let g:javascript_conceal_this           = "@"
+let g:javascript_conceal_arrow_function = "⇒"
