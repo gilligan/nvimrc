@@ -18,6 +18,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-projectionist'
+Plug 'tpope/vim-rhubarb'
 
 "
 " completions & snippets
@@ -26,7 +27,7 @@ Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Shougo/deoplete.nvim'
-Plug 'carlitux/deoplete-ternjs'
+"Plug 'carlitux/deoplete-ternjs'
 Plug 'ujihisa/neco-look'
 
 "
@@ -36,10 +37,12 @@ Plug 'othree/html5.vim'
 Plug 'mxw/vim-jsx'
 Plug 'elzr/vim-json'
 Plug 'janko-m/vim-test'
+Plug 'flowtype/vim-flow'
+Plug 'steelsojka/deoplete-flow'
 "Plug 'marijnh/tern_for_vim'
 "Plug 'sheerun/vim-polyglot'
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+"Plug 'leafgarland/typescript-vim'
+"Plug 'peitalin/vim-jsx-typescript'
 "
 " text objects & movements
 "
@@ -63,12 +66,13 @@ Plug 'haya14busa/vim-operator-flashy'
 " haskell
 "
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
 Plug 'cloudhead/neovim-ghcid', { 'for': 'haskell' }
 Plug 'ujihisa/neco-ghc', { 'for': 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
-"Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
+Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
 Plug 'ujihisa/unite-haskellimport', { 'for': 'haskell' }
-"Plug 'eagletmt/unite-haddock', { 'for': 'haskell' }
+Plug 'eagletmt/unite-haddock', { 'for': 'haskell' }
 
 "
 " idris
@@ -87,7 +91,9 @@ Plug 'junegunn/gv.vim'
 "
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'altercation/vim-colors-solarized'
+"Plug 'altercation/vim-colors-solarized'
+Plug 'iCyMind/NeoSolarized'
+Plug 'morhetz/gruvbox'
 
 "
 " terminal / integration
@@ -100,7 +106,7 @@ Plug 'kassio/neoterm'
 "
 " navigation / buffers
 "
-Plug 'ctrlpvim/ctrlp.vim'
+"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Valloric/ListToggle'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -108,6 +114,8 @@ Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 Plug 'Majutsushi/tagbar'
 Plug 'wellle/visual-split.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 
 "
 " misc
@@ -127,6 +135,8 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'jceb/vim-orgmode'
 Plug 'reedes/vim-wordy'
 Plug 'elmcast/elm-vim'
+Plug 'tyru/open-browser.vim'
+
 
 call plug#end()
 
@@ -189,23 +199,46 @@ set timeoutlen=1000 ttimeoutlen=0
 syntax on
 set t_Co=256
 set t_ut=
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
-colo solarized
+let g:neosolarized_contrast = "high"
+let g:neosolarized_visibility = "high"
+"colo solarized
+colo NeoSolarized
 
 "
-" tern settings
+" deoplete tern settings
 "
-set updatetime=2000
-let g:tern_show_argument_hints="on_hold"
-let g:tern_request_timeout = 1
+let g:deoplete#sources#ternjs#types = 1
 
 "
+" deoplete flow settings
+"
+let g:deoplete#sources#flow#flow_bin = 'flow' 
+
+"
+" vim-flow settings
+"
+let g:flow#enable = 0
+let g:flow#omnifunc = 0
+
 " airline settings
 "
 let g:airline_powerline_fonts = 1
-let g:airline_theme='molokai'
+let g:airline_theme='solarized'
 let g:airline#extensions#ale#enabled = 1
+
+"
+" ale/flow config: use globally installed executable
+"
+let g:ale_javascript_flow_use_global = 1
+
+"
+" vim-flow
+"
+let g:flow#enable = 0
 
 "
 " auto commands
@@ -260,6 +293,7 @@ let g:ctrlp_buftag_types = {
 "
 " fugitive plugin
 "
+let g:github_enterprise_urls = ['https://github.hc.ag']
 autocmd QuickFixCmdPost *grep* cwindow
 
 let $PATH = $PATH . ':' . expand("~/.cabal/bin")
@@ -267,6 +301,8 @@ let $PATH = $PATH . ':' . expand("~/.cabal/bin")
 "
 " haskell-vim settings
 "
+
+set tags=tags;/,codex.tags;/
 
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
 let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
@@ -285,55 +321,11 @@ call unite#custom_default_action('haddock', 'browse_remote')
 " configuration for necoghc
 "
 let g:necoghc_enable_detailed_browse = 1
-
-
+let g:necoghc_debug = 1
 "
 " configuration for ghcimportedfrom-vim
 "
 let g:ghcimportedfrom_browser = '/usr/bin/chromium-browser'
-
-"
-" configuration for tagbar
-"
-if executable('lushtags')
-    let g:tagbar_type_haskell = {
-        \ 'ctagsbin' : 'lushtags',
-        \ 'ctagsargs' : '--ignore-parse-error --',
-        \ 'kinds' : [
-            \ 'm:module:0',
-            \ 'e:exports:1',
-            \ 'i:imports:1',
-            \ 't:declarations:0',
-            \ 'd:declarations:1',
-            \ 'n:declarations:1',
-            \ 'f:functions:0',
-            \ 'c:constructors:0'
-        \ ],
-        \ 'sro' : '.',
-        \ 'kind2scope' : {
-            \ 'd' : 'data',
-            \ 'n' : 'newtype',
-            \ 'c' : 'constructor',
-            \ 't' : 'type'
-        \ },
-        \ 'scope2kind' : {
-            \ 'data' : 'd',
-            \ 'newtype' : 'n',
-            \ 'constructor' : 'c',
-            \ 'type' : 't'
-        \ }
-    \ }
-endif
-
-"
-" configuration for ctrlp
-"
-let g:ctrlp_buftag_types = {
-  \ 'haskell' : {
-    \ 'bin': 'lushtags',
-    \ 'args': '--ignore-parse-error --',
-    \ },
-  \ }
 
 
 " fix highlightning of functions
@@ -356,25 +348,12 @@ nnoremap <leader>hr :call GhciReload()<CR>
 nnoremap <leader>hs :execute "Unite hoogle"<CR>
 nnoremap <leader>hb k0yiWjpA
 nnoremap <leader>tn :execute "Tnew"<CR>
+nnoremap <leader>tt :execute "Ttoggle"<CR>
 nnoremap <leader>tc :execute "Tclose"<CR>
 
 
 
 " general mappings {{{
-
-"
-" Function keys
-"
-map <F2> :NERDTreeToggle<CR>
-map <S-F2> :NERDTreeFind<CR>
-map <F3> :TagbarToggle<CR>
-map <F4> :ConqueTermSplit bash<CR>
-nmap <F9> :SCCompile<cr>
-nmap <F10> :SCCompileRun<cr>
-
-" ctrlp mappings
-map <C-\> :CtrlPBufTag<cr>
-map <C-t> :CtrlPTag<cr>
 
 " go to start/end of line
 imap <C-E> <C-O>$
@@ -409,7 +388,6 @@ vnoremap ; y:<C-r>"<C-b>
 " home row leader key mappings
 "
 nnoremap <leader><CR> :NERDTreeToggle<CR>
-nmap <leader>ds <Plug>DashSearch
 " nnoremap <leader>s <Plug>SlimeParagraphSend()
 " nnoremap <leader>d YCM           <-- get rid of this
 "nnoremap <leader>f :Unite -start-insert file_rec/async<CR>
@@ -425,12 +403,12 @@ nmap <leader>ds <Plug>DashSearch
 " non-home row leader mappings
 "
 nnoremap <leader>o :Unite -start-insert outline<CR>
-nnoremap <leader>t :CtrlPBufTag<CR>
 
 " visual select last paste (textobj-lastpate)
 nnoremap <leader>p vip
 
-"nnoremap <C-i> :FZF<cr>
+nnoremap <C-p> :FZF<cr>
+nnoremap <C-g> :GFiles<cr>
 " general mappings }}}
 
 
@@ -479,7 +457,8 @@ nnoremap <leader>mr :TestFile<CR>
 nnoremap <leader>mi :TestNearest<CR>
 nnoremap <leader>ml :TestLast<CR>
 nnoremap <leader>mc :Tclose<CR>
-let test#strategy = 'neoterm'
+"let test#strategy = 'neoterm'
+let test#strategy = 'neovim'
 
 " Zoom / Restore window.
 function! s:ZoomToggle() abort
@@ -506,6 +485,10 @@ set splitright
 " Terminal settings
 if has('nvim')
     tnoremap <F2> <C-\><C-n>
+    tnoremap <C-h> <C-\><C-n><C-w>h
+    tnoremap <C-j> <C-\><C-n><C-w>j
+    tnoremap <C-k> <C-\><C-n><C-w>k
+    tnoremap <C-l> <C-\><C-n><C-w>l
     "tnoremap ,<ESC> <C-\><C-n>
 endif
 
@@ -544,3 +527,26 @@ let g:deoplete#omni_patterns = {}
 let g:javascript_conceal_function       = "λ"
 let g:javascript_conceal_this           = "@"
 let g:javascript_conceal_arrow_function = "⇒"
+
+" neoterm
+let g:neoterm_size = 10
+
+" tab navigation
+"
+nnoremap <C-f>1 1gt
+nnoremap <C-f>2 2gt
+nnoremap <C-f>3 3gt
+nnoremap <C-f>4 4gt
+nnoremap <C-f>5 5gt
+nnoremap <C-f>c :tabnew<CR>
+nnoremap <C-f>q :tabclose<CR>
+
+" openbrowser settings
+let g:netrw_nogx = 1 " disable netrw's gx mapping.
+nmap gx <Plug>(openbrowser-smart-search)
+vmap gx <Plug>(openbrowser-smart-search)
+
+
+" tmux color hacking stuff
+set t_8f=^[[38;2;%lu;%lu;%lum
+set t_8b=^[[48;2;%lu;%lu;%lum
