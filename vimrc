@@ -27,8 +27,6 @@ Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Shougo/deoplete.nvim'
-"Plug 'carlitux/deoplete-ternjs'
-Plug 'ujihisa/neco-look'
 
 "
 " javascript stuff
@@ -39,10 +37,6 @@ Plug 'elzr/vim-json'
 Plug 'janko-m/vim-test'
 Plug 'flowtype/vim-flow'
 Plug 'steelsojka/deoplete-flow'
-"Plug 'marijnh/tern_for_vim'
-"Plug 'sheerun/vim-polyglot'
-"Plug 'leafgarland/typescript-vim'
-"Plug 'peitalin/vim-jsx-typescript'
 "
 " text objects & movements
 "
@@ -65,19 +59,15 @@ Plug 'haya14busa/vim-operator-flashy'
 "
 " haskell
 "
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
-Plug 'cloudhead/neovim-ghcid', { 'for': 'haskell' }
-Plug 'ujihisa/neco-ghc', { 'for': 'haskell' }
+"Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
+"Plug 'ndmitchell/ghcid', { 'rtp': 'plugins/nvim' }
+"Plug 'ujihisa/neco-ghc', { 'for': 'haskell' }
 Plug 'eagletmt/ghcmod-vim', { 'for': 'haskell' }
 Plug 'Twinside/vim-hoogle', { 'for': 'haskell' }
 Plug 'ujihisa/unite-haskellimport', { 'for': 'haskell' }
 Plug 'eagletmt/unite-haddock', { 'for': 'haskell' }
-
-"
-" idris
-"
-Plug 'idris-hackers/idris-vim'
+"Plug 'parsonsmatt/intero-neovim', { 'for': 'haskell' }
+"Plug 'bitc/vim-hdevtools', { 'for': 'haskell' }
 
 "
 " git / scm
@@ -91,9 +81,7 @@ Plug 'junegunn/gv.vim'
 "
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'altercation/vim-colors-solarized'
 Plug 'iCyMind/NeoSolarized'
-Plug 'morhetz/gruvbox'
 
 "
 " terminal / integration
@@ -106,7 +94,6 @@ Plug 'kassio/neoterm'
 "
 " navigation / buffers
 "
-"Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Valloric/ListToggle'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
@@ -116,7 +103,7 @@ Plug 'Majutsushi/tagbar'
 Plug 'wellle/visual-split.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-
+Plug 'kmnk/vim-unite-giti'
 "
 " misc
 "
@@ -125,7 +112,6 @@ Plug 'KabbAmine/zeavim.vim'
 Plug 'airblade/vim-rooter'
 Plug 'itchyny/calendar.vim'
 Plug 'LnL7/vim-nix'
-"Plug 'benekastah/neomake'
 Plug 'w0rp/ale'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'rizzatti/dash.vim'
@@ -136,6 +122,7 @@ Plug 'jceb/vim-orgmode'
 Plug 'reedes/vim-wordy'
 Plug 'elmcast/elm-vim'
 Plug 'tyru/open-browser.vim'
+Plug 'shime/vim-livedown'
 
 
 call plug#end()
@@ -351,8 +338,6 @@ nnoremap <leader>tn :execute "Tnew"<CR>
 nnoremap <leader>tt :execute "Ttoggle"<CR>
 nnoremap <leader>tc :execute "Tclose"<CR>
 
-
-
 " general mappings {{{
 
 " go to start/end of line
@@ -448,8 +433,6 @@ let g:dash_map = {
     \ 'javascript': [ 'javascript', 'nodejs', 'ramda' ]
     \}
 
-"autocmd! BufWritePost * Neomake
-
 "
 " vim test settings
 "
@@ -495,14 +478,8 @@ endif
 "
 " ale linters
 "
-let g:ale_linters = {'haskell': ['hlint', 'ghc']}
+let g:ale_linters = {'haskell': ['hlint', 'intero', 'ghc']}
 
-
-" neomake settings
-let g:neomake_open_list = 0
-let g:neomake_javascript_enabled_makers = ['eslint']
-" define elm-make maker
-let g:neomake_haskell_enabled_makers = [ ]
 
 " ctrlsf settings
 nmap     <leader>f <Plug>CtrlSFPrompt
@@ -523,6 +500,8 @@ let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#omni_patterns = {}
+let g:deoplete#sources = {}
+let g:deoplete#sources.markdown = ['buffer', 'look']
 
 let g:javascript_conceal_function       = "λ"
 let g:javascript_conceal_this           = "@"
